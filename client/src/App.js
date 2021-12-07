@@ -15,6 +15,7 @@ import ReviewPage from './components/pages/ReviewList/ReviewPage'
 import UserPage from './components/pages/UserList/UserPage'
 import UserProfile from './components/pages/UserProfile/UserProfile'
 import MyProfile from './components/pages/UserProfile/MyProfile';
+import GamePlay from './components/pages/GameList/GamePlay';
 
 
 
@@ -55,7 +56,9 @@ class App extends Component {
           <Switch>
             <Route path="/" exact render={() => <Home />} />
             <Route path="/game-list" exact render={() => <GamePage />} />
-            <Route path="/game/:id" render={(props) => <GameDetails {...props} />} />
+            <Route path="/game/details/:id" render={(props) => <GameDetails {...props} />} />
+            <Route path="/game/:id" render={(props) => <GamePlay {...props} />} />
+
 
             <Route path="/user-list" render={() => <UserPage />} />
 

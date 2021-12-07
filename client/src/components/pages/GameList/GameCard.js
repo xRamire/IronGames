@@ -8,7 +8,7 @@ const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, 
         <Card className="game-card" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
-                <Card.Title> <a href={gameUrl}>{title}</a></Card.Title>
+                <Card.Title> {title}</Card.Title>
                 <Card.Text>
                     {description}.
                 </Card.Text>
@@ -20,6 +20,10 @@ const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, 
                 </Card.Text>
 
                 <Link to={`/game/${_id}`}>
+                    <Button variant="primary">Jugar</Button>
+                </Link>
+
+                <Link to={`/game/details/${_id}`}>
                     <Button variant="primary">Details</Button>
                 </Link>
             </Card.Body>

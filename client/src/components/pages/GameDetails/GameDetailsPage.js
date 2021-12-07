@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import GameService from '../../../services/game.service'
+import '../GameList/GamePage.css'
 
 class GameDetails extends Component {
     constructor() {
@@ -24,7 +25,7 @@ class GameDetails extends Component {
     componentDidMount() {
         const id = this.props.match.params.id
 
-        this.service.getOneGame(id)
+        this.service.getGameDetails(id)
             .then(response => {
                 const { title, description, genre, creators, imageUrl, github, date, gameUrl } = response.data
 
@@ -37,9 +38,7 @@ class GameDetails extends Component {
         const { title, description, genre, creators, imageUrl, github, date, gameUrl} = this.state
 
         return (
-            <Container>
-                <h1>Detalles</h1>
-
+            <Container className='padding'>
                 <Row className="justify-content-around">
                     <Col md={6} style={{ overflow: "hidden" }}>
                         <article>
@@ -49,15 +48,15 @@ class GameDetails extends Component {
                                 <hr />
                                 <br />
                                 <p>Genre: {genre}</p>
-                                <p>Creators: {creators}</p>
-                                <p>Github: {github}</p>
+                                <p>Made by: {creators}</p>
+                                <p><a href="{github}">Repositorio Github</a></p>
                                 <p>Date: {date}</p>
                                 <p>GameUrl: {gameUrl}</p>
                             </div>
                         </article>
                     </Col>
                     <Col md={4}>
-                        <img src={imageUrl} alt={title} ></img>
+                        <img className='details-img' src={imageUrl} alt={title} ></img>
                     </Col>
                 </Row>
             </Container >
