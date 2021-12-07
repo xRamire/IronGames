@@ -14,6 +14,7 @@ import Footer from './components/layout/Footer/Footer'
 import ReviewPage from './components/pages/ReviewList/ReviewPage'
 import UserPage from './components/pages/UserList/UserPage'
 import UserProfile from './components/pages/UserProfile/UserProfile'
+import MyProfile from './components/pages/UserProfile/MyProfile';
 
 
 
@@ -59,6 +60,10 @@ class App extends Component {
             <Route path="/user-list" render={() => <UserPage />} />
 
             <Route path="/profile/:id" render={(props) => <UserProfile {...props} />} />
+
+            <Route path="/my-profile" render={(props) => <MyProfile {...props}/>} />
+
+
 
 
 

@@ -47,7 +47,17 @@ router.delete("/delete", (req, res) => {
 
 
 
+//  PERFIL propio
 
+router.get("/my-profile", (req, res) => {
+    
+    const currentUser = req.session.currentUser;
+    const id = currentUser._id
+
+    User.findById(id)
+        .then(theUser => res.json(theUser))
+        .catch(err => res.json({ err, errMessage: "Problem searching this user" }))
+})
 
 
 

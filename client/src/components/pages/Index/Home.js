@@ -13,6 +13,7 @@ const Home = () => {
             <Link to="/game-list">
                 <Button variant="dark" size="lg">Ver juegos</Button>
             </Link>
+
         </Container>
     )
 }

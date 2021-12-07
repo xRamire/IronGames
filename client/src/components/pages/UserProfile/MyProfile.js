@@ -4,7 +4,7 @@ import UserService from '../../../services/user.service'
 
 
 
-class UserProfile extends Component {
+class MyProfile extends Component {
     constructor() {
         super()
 
@@ -15,15 +15,16 @@ class UserProfile extends Component {
             image: "",
             favs: ""
         }
+        
 
         this.service = new UserService()
     }
 
     componentDidMount() {
-        
+
         const id = this.props.match.params.id
 
-        this.service.getUserDetails(id)
+        this.service.getMyProfile(id)
             .then(response => {
                 const { username, email, image } = response.data
 
@@ -59,4 +60,4 @@ class UserProfile extends Component {
     }
 }
 
-export default UserProfile
+export default MyProfile

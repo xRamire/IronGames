@@ -11,6 +11,8 @@ class UserService {
     
     getAllUsers = () => this.app.get("/all")
     getUserDetails = (id) => this.app.get(`/profile/${id}`)
+    getMyProfile = (id) => this.app.get(`/my-profile`)
+
     userEdit = (id, password, email) => this.app.get(`/edit/${id}`, { password, email })
     userDelete = (id) => this.app.get(`/delete/${id}`)
 }

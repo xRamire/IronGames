@@ -14,6 +14,8 @@ const Navigation = ({ loggedUser, storeUser }) => {
             .catch(err => console.log(err))
     }
 
+
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -22,11 +24,13 @@ const Navigation = ({ loggedUser, storeUser }) => {
                     <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                     <Nav.Link as={Link} to="/game-list">Videogames list</Nav.Link>
                     <Nav.Link as={Link} to="/user-list">User list</Nav.Link>
-                    {/* <Nav.Link as={Link} to="/profile">Profile</Nav.Link> */}
 
 
                     {loggedUser ?
-                        <Nav.Link as={"span"} onClick={logout}>Logout</Nav.Link>
+                        <>
+                            <Nav.Link as={Link} to="/my-profile">Profile</Nav.Link>
+                            <Nav.Link as={Link} to='/' onClick={logout}>Logout</Nav.Link>
+                        </>
                         :
                         <>
                             <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
