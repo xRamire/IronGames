@@ -3,7 +3,9 @@ import axios from 'axios'
 class GameService {
     constructor() {
         this.app = axios.create({
-            baseURL: 'http://localhost:5000/games'
+            baseURL: 'http://localhost:5000/games',
+            withCredentials: true
+
         })
     }
 

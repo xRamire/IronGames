@@ -1,44 +1,103 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
+import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import GameService from '../../../services/game.service'
+import SearchBar from '../../layout/SearchBar/SearchBar';
 import GameList from "./GameList"
 
-class GamePage extends Component {
-    constructor() {
-        super()
+const gameService = new GameService()
 
-        this.state = {
-            games: []
-        }
+function GamePage(props) {
+    
+    const [games, setGames] = useState([]);
+    const [search, setSearch] = useState('');
+    const [filteredGames, setFilteredGames] = useState([]);
 
-        this.service = new GameService()
-    }
-
-    componentDidMount() {
-        this.refreshGames()
-    }
-
-    refreshGames = () => {
-        this.service.getAllGames()
+    const getAllGames = () => {
+        gameService
+            .getAllGames()
             .then(response => {
                 const games = response.data
-
-                this.setState({ games: games })
+                setGames(games)
+                setFilteredGames(games)
             })
             .catch(err => console.log(err))
     }
 
-    render() {
+    useEffect(() => {
+       getAllGames()
+    }, []);
 
-        return (
-            <Container>
-                <h1>Game List</h1>
+    const getSearch = (searchbarInfo) => {
+        setSearch(searchbarInfo);
+    };
 
-                <GameList refreshGames={this.refreshGames} games={this.state.games} />
+    useEffect(() => {
+        let filteredGames = games.filter((game) => game.title.toLowerCase().includes(search));
+        setFilteredGames(filteredGames);
+    }, [search]);
 
-            </Container>
-        )
-    }
+    return (
+        <Container>
+            <h1>Game List</h1>
+
+            <SearchBar getSearch={getSearch} />
+
+            <GameList getAllGames={getAllGames} games={filteredGames} />
+
+        </Container>
+    );
 }
 
-export default GamePage
+export default GamePage;
+
+
+
+
+
+
+
+
+
+// class GamePage extends Component {
+//     constructor() {
+//         super()
+
+//         this.state = {
+//             games: []
+//         }
+
+//         this.service = new GameService()
+//     }
+//---------------------------------------------------------
+// = const [games, setGames] = useState([]);
+//----------------------------------------------------------
+
+//     componentDidMount() {
+//         this.refreshGames()
+//     }
+
+//     refreshGames = () => {
+//         this.service.getAllGames()
+//             .then(response => {
+//                 const games = response.data
+
+//                 this.setState({ games: games })
+//             })
+//             .catch(err => console.log(err))
+//     }
+
+//     render() {
+
+//         return (
+//             <Container>
+//                 <h1>Game List</h1>
+
+//                 <GameList refreshGames={this.refreshGames} games={this.state.games} />
+
+//             </Container>
+//         )
+//     }
+// }
+
+// export default GamePage

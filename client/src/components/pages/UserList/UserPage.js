@@ -1,44 +1,100 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Container } from 'react-bootstrap'
 import UserService from '../../../services/user.service'
 import UserList from "./UserList"
+import SearchBar from "../../layout/SearchBar/SearchBar"
 
-class UserPage extends Component {
-    constructor() {
-        super()
 
-        this.state = {
-            users: []
-        }
 
-        this.service = new UserService()
-    }
 
-    componentDidMount() {
-        this.refreshUsers()
-    }
+const userService = new UserService()
 
-    refreshUsers = () => {
-        this.service.getAllUsers()
+function UserPage(props) {
+
+    const [users, setUsers] = useState([]);
+    const [search, setSearch] = useState('');
+    const [filteredUsers, setFilteredUsers] = useState([]);
+
+    const getAllUsers = () => {
+        userService
+            .getAllUsers()
             .then(response => {
                 const users = response.data
-
-                this.setState({ users: users })
+                setUsers(users)
+                setFilteredUsers(users)
             })
             .catch(err => console.log(err))
     }
 
-    render() {
+    useEffect(() => {
+        getAllUsers()
+    }, []);
 
-        return (
-            <Container>
-                <h1>User List</h1>
+    const getSearch = (searchbarInfo) => {
+        setSearch(searchbarInfo);
+    };
 
-                <UserList refreshUsers={this.refreshUsers} users={this.state.users} />
+    useEffect(() => {
+        let filteredUsers = users.filter((user) => user.username.toLowerCase().includes(search));
+        setFilteredUsers(filteredUsers);
+    }, [search]);
 
-            </Container>
-        )
-    }
+    return (
+        <Container>
+            <h1>User List</h1>
+
+            <SearchBar getSearch={getSearch} />
+
+            <UserList getAllUsers={getAllUsers} users={filteredUsers} />
+
+        </Container>
+    );
 }
 
-export default UserPage
+export default UserPage;
+
+
+
+
+
+
+
+// class UserPage extends Component {
+//     constructor() {
+//         super()
+
+//         this.state = {
+//             users: []
+//         }
+
+//         this.service = new UserService()
+//     }
+
+//     componentDidMount() {
+//         this.refreshUsers()
+//     }
+
+//     refreshUsers = () => {
+//         this.service.getAllUsers()
+//             .then(response => {
+//                 const users = response.data
+
+//                 this.setState({ users: users })
+//             })
+//             .catch(err => console.log(err))
+//     }
+
+//     render() {
+
+//         return (
+//             <Container>
+//                 <h1>User List</h1>
+
+//                 <UserList refreshUsers={this.refreshUsers} users={this.state.users} />
+
+//             </Container>
+//         )
+//     }
+// }
+
+// export default UserPage

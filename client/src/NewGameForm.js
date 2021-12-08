@@ -27,7 +27,7 @@ export default class NewGameForm extends Component {
         this.service.createGame(this.state)
             .then(response => {
                 this.props.closeModal()
-                this.props.refreshGames()
+                this.props.getAllGames()
             })
             .catch(err => console.log(err))
 

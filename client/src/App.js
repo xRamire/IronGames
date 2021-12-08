@@ -16,10 +16,7 @@ import UserPage from './components/pages/UserList/UserPage'
 import UserProfile from './components/pages/UserProfile/UserProfile'
 import MyProfile from './components/pages/UserProfile/MyProfile';
 import GamePlay from './components/pages/GameList/GamePlay';
-
-
-
-
+import SearchBar from './components/layout/SearchBar/SearchBar';
 
 
 
@@ -44,6 +41,11 @@ class App extends Component {
   storeUser = (user) => {
     this.setState({ loggedUser: user })
   }
+
+
+
+
+
 
 
   render() {
