@@ -31,6 +31,8 @@ router.get("/game/details/:id", (req, res) => {
 router.post("/new", (req, res) => {
     const { title, description, genre, creators, imageUrl, github, date, gameUrl } = req.body
 
+    console.log(req.body)
+
     Game.create({ title, description, genre, creators, imageUrl, github, date, gameUrl })
         .then(newGame => res.json(newGame))
         .catch(err => res.json({ err, errMessage: "Problem creating Game" }))

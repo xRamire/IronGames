@@ -12,7 +12,7 @@ const gameSchema = new Schema(
         },
         creators: [{ type: String }],
         imageUrl: String,
-        github: String, 
+        github: String,
         date: Date,
         gameUrl: String
 
