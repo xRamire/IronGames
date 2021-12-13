@@ -1,5 +1,6 @@
 const router = require("express").Router()
 const User = require("../models/User.model")
+const { isLoggedIn, checkRoles } = require("../middlewares/index")
 const bcrypt = require("bcrypt")
 const bcryptSalt = 10
 
@@ -54,7 +55,7 @@ router.post('/login', (req, res) => {
 })
 
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isLoggedIn, (req, res) => {
     console.log(req.session.currentUser)
     req.session.destroy((err) => res.status(200).json({ code: 200, message: 'Logout successful' }));
 })
@@ -63,8 +64,6 @@ router.get("/isloggedin", (req, res) => {
     req.session.currentUser ? res.json(req.session.currentUser) : res.status(401).json({ code: 401, message: 'Unauthorized' })
 })
 
-
-// TODO HACER RUTA USERS
 router.put("/edit", (req, res) => {
 
     const { id } = req.query
@@ -82,9 +81,5 @@ router.delete("/delete", (req, res) => {
         .then(info => res.json({info}))
         .catch(err => res.json ({err}))
 })
-
-
-
-
 
 module.exports = router

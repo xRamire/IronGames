@@ -8,7 +8,6 @@ class ReviewService {
 
         })
     }
-
     getAllReviews = () => this.app.get("/all")
     createReview = (reviewData) => this.app.post("/new", reviewData)
     editReview = (id) => this.app.put(`/edit/${id}`)

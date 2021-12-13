@@ -1,11 +1,8 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from 'react-bootstrap'
 import UserService from '../../../services/user.service'
 import UserList from "./UserList"
 import SearchBar from "../../layout/SearchBar/SearchBar"
-
-
-
 
 const userService = new UserService()
 
@@ -42,59 +39,10 @@ function UserPage(props) {
     return (
         <Container>
             <h1>User List</h1>
-
             <SearchBar getSearch={getSearch} />
-
             <UserList getAllUsers={getAllUsers} users={filteredUsers} />
-
         </Container>
     );
 }
 
-export default UserPage;
-
-
-
-
-
-
-
-// class UserPage extends Component {
-//     constructor() {
-//         super()
-
-//         this.state = {
-//             users: []
-//         }
-
-//         this.service = new UserService()
-//     }
-
-//     componentDidMount() {
-//         this.refreshUsers()
-//     }
-
-//     refreshUsers = () => {
-//         this.service.getAllUsers()
-//             .then(response => {
-//                 const users = response.data
-
-//                 this.setState({ users: users })
-//             })
-//             .catch(err => console.log(err))
-//     }
-
-//     render() {
-
-//         return (
-//             <Container>
-//                 <h1>User List</h1>
-
-//                 <UserList refreshUsers={this.refreshUsers} users={this.state.users} />
-
-//             </Container>
-//         )
-//     }
-// }
-
-// export default UserPage
+export default UserPage

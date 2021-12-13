@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const gameSchema = new Schema(
     {
         title: { type: String, required: true },
@@ -10,21 +9,15 @@ const gameSchema = new Schema(
             enum: ['Adventure', 'Fighting', 'Beat\'em up', 'Shooter', 'Multiplayer', 'Sports', 'Terror', 'Racing', 'Other' ],
             required: true
         },
-        creators: [{ type: String }],
-        imageUrl: String,
-        github: String,
-        date: Date,
-        gameUrl: String
-
-
-
-
+        creators: [{ type: String, required: true }],
+        imageUrl: {type: String, required: true},
+        github: { type: String, required: true },
+        date: { type: Date, required: true },
+        gameUrl: { type: String, required: true },
     },
     {
         timestamps: true
-
     }
-
 );
 
 const Game = model("Game", gameSchema);

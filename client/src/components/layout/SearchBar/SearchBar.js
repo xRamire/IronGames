@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 function SearchBar(props) { 
 
@@ -8,14 +8,9 @@ function SearchBar(props) {
     };
 
     return (
-        <div>
-            <label>
+        <div><label>
                 Search:
-                <input
-                    onChange={(e) => handleSearchChange(e)}
-                    name="name"
-                    type="text"
-                />
+                <input onChange={(e) => handleSearchChange(e)} name="name" type="text"/>
             </label>
         </div>
     );

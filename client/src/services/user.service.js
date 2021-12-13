@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider'
 
 class UserService {
     constructor() {
@@ -8,12 +7,10 @@ class UserService {
             withCredentials: true
         })
     }
-    
     getAllUsers = () => this.app.get("/all")
     getUserDetails = (id) => this.app.get(`/profile/${id}`)
     getMyProfile = (id) => this.app.get(`/my-profile`)
-
-    userEdit = (id, password, email) => this.app.get(`/edit/${id}`, { password, email })
+    userEdit = (user) => this.app.get(`/edit/${user._id}`, user)
     userDelete = (id) => this.app.get(`/delete/${id}`)
 }
 

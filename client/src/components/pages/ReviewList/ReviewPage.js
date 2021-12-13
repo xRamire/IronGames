@@ -4,10 +4,6 @@ import ReviewService from '../../../services/review.service'
 import SearchBar from '../../layout/SearchBar/SearchBar';
 import ReviewList from "./ReviewList"
 
-
-
-
-
 const reviewService = new ReviewService()
 
 function ReviewPage(props) {
@@ -43,11 +39,8 @@ function ReviewPage(props) {
     return (
         <Container>
             <h1>Game List</h1>
-
             <SearchBar getSearch={getSearch} />
-
             <ReviewList getAllGames={getAllReviews} games={filteredReviews} />
-
         </Container>
     );
 }

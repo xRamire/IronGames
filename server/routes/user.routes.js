@@ -1,38 +1,30 @@
 const router = require("express").Router()
 const User = require("../models/User.model")
+const { isLoggedIn, checkRoles } = require("../middlewares/index")
 
 
-// LISTA USERS
 router.get("/all", (req, res) => {
     User.find()
         .then(allUsers => res.json(allUsers))
-        .catch(err => res.json({ err, errMessage: "Problem finding Users" }))
+        .catch(err => res.status(500).json({ err, errMessage: "Problem finding Users" }))
 })
-
-
-//  PERFILES GENERAL
 
 router.get("/profile/:id", (req, res) => {
     const { id } = req.params
 
     User.findById(id)
         .then(theUser => res.json(theUser))
-        .catch(err => res.json({ err, errMessage: "Problem searching this user" }))
+        .catch(err => res.status(500).json({ err, errMessage: "Problem searching this user" }))
 })
-
-
-// EDIT
 
 router.put("/edit", (req, res) => {
 
     const { id } = req.query
-    const { password, email, image } = req.body
+    const { username, password, email, image, favs } = req.body
 
-    User.findByIdAndUpdate(id, { password, email, image }, { new: true })
-        .then((user) => res.json({ user }))
+    User.findByIdAndUpdate(id, { username, password, email, image, favs }, { new: true })
+        .then((user) => res.status(500).json({ user }))
 })
-
-// DELETE
 
 router.delete("/delete", (req, res) => {
 
@@ -40,28 +32,17 @@ router.delete("/delete", (req, res) => {
 
     User.findByIdAndDelete(id)
         .then(info => res.json({ info }))
-        .catch(err => res.json({ err }))
+        .catch(err => res.status(500).json({ err }))
 })
 
-
-
-
-
-//  PERFIL propio
-
-router.get("/my-profile", (req, res) => {
+router.get("/my-profile", isLoggedIn, (req, res) => {
     
     const currentUser = req.session.currentUser;
     const id = currentUser._id
 
     User.findById(id)
         .then(theUser => res.json(theUser))
-        .catch(err => res.json({ err, errMessage: "Problem searching this user" }))
+        .catch(err => res.status(500).json({ err, errMessage: "Problem searching this user" }))
 })
-
-
-
-
-
 
 module.exports = router

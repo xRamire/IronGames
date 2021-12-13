@@ -5,7 +5,6 @@ import AuthService from '../../../services/auth.service'
 
 const authService = new AuthService()
 
-
 const Navigation = ({ loggedUser, storeUser }) => {
 
     const logout = () => {
@@ -13,8 +12,6 @@ const Navigation = ({ loggedUser, storeUser }) => {
             .then(response => storeUser(null))
             .catch(err => console.log(err))
     }
-
-
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -25,7 +22,6 @@ const Navigation = ({ loggedUser, storeUser }) => {
                     <Nav.Link as={Link} to="/game-list">Videogames list</Nav.Link>
                     <Nav.Link as={Link} to="/user-list">User list</Nav.Link>
 
-
                     {loggedUser ?
                         <>
                             <Nav.Link as={Link} to="/my-profile">Profile</Nav.Link>
@@ -35,12 +31,12 @@ const Navigation = ({ loggedUser, storeUser }) => {
                         <>
                             <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            
                         </>
                     }
                 </Nav>
             </Container>
         </Navbar>
-
     )
 }
 

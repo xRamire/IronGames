@@ -9,13 +9,8 @@ const UserCard = ({ _id, username, email, role, favs, image }) => {
             <Card.Img variant="top" src={image} />
             <Card.Body>
                 <Card.Title> {username}</Card.Title>
-                <Card.Text>
-                    {email}.
-                </Card.Text>
-                <Card.Text>
-                    {role}.
-                </Card.Text>
-
+                <Card.Text>{email}</Card.Text>
+                <Card.Text>{role}</Card.Text>
                 <Link to={`/profile/${_id}`}>
                     <Button variant="primary">Profile</Button>
                 </Link>

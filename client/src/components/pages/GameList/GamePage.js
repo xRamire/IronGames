@@ -1,4 +1,3 @@
-// import React, { Component } from "react";
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import GameService from '../../../services/game.service'
@@ -40,64 +39,10 @@ function GamePage(props) {
     return (
         <Container>
             <h1>Game List</h1>
-
             <SearchBar getSearch={getSearch} />
-
             <GameList getAllGames={getAllGames} games={filteredGames} />
-
         </Container>
     );
 }
 
-export default GamePage;
-
-
-
-
-
-
-
-
-
-// class GamePage extends Component {
-//     constructor() {
-//         super()
-
-//         this.state = {
-//             games: []
-//         }
-
-//         this.service = new GameService()
-//     }
-//---------------------------------------------------------
-// = const [games, setGames] = useState([]);
-//----------------------------------------------------------
-
-//     componentDidMount() {
-//         this.refreshGames()
-//     }
-
-//     refreshGames = () => {
-//         this.service.getAllGames()
-//             .then(response => {
-//                 const games = response.data
-
-//                 this.setState({ games: games })
-//             })
-//             .catch(err => console.log(err))
-//     }
-
-//     render() {
-
-//         return (
-//             <Container>
-//                 <h1>Game List</h1>
-
-//                 <GameList refreshGames={this.refreshGames} games={this.state.games} />
-
-//             </Container>
-//         )
-//     }
-// }
-
-// export default GamePage
+export default GamePage

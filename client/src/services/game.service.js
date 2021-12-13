@@ -8,12 +8,11 @@ class GameService {
 
         })
     }
-
     getAllGames = () => this.app.get("/all")
     getOneGame = (id) => this.app.get(`/game/${id}`) // Pagina iFrame del juego
     getGameDetails = (id) => this.app.get(`/game/details/${id}`)
     createGame = (game) => this.app.post("/new", game)
-    editGame = (id) => this.app.put(`/edit/${id}`)
+    editGame = (game) => this.app.put(`/edit/${game._id}`, game)
     deleteGame = (id) => this.app.delete(`/delete/${id}`)
 }
 

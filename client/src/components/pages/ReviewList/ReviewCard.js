@@ -14,7 +14,6 @@ const ReviewCard = ({ id, comment, game, rating  }) => {
                 <Card.Text>
                     {comment}.
                 </Card.Text>
-
             </Card.Body>
         </Card>
     )
