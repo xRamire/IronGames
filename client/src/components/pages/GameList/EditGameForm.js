@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import GameService from '../../../services/game.service'
+import Spinner from '../../shared/Spinner'
+import UploadService from '../../../services/upload.service'
 
 const gameService = new GameService()
+const uploadService = new UploadService()
+
 
 function EditGameForm(props) {
 
@@ -18,6 +22,9 @@ function EditGameForm(props) {
         gameUrl: "",
         // reviews: ""  
     });
+
+    const [loading, setLoading] = useState({ loading: false });
+
 
 
     useEffect(() => {
@@ -36,7 +43,6 @@ function EditGameForm(props) {
             .then(response => {
                 props.setGame(response.data)
                 props.closeModal()
-                // props.getGameDetails()
             })
             .catch(err => console.log(err))
     }
@@ -46,6 +52,23 @@ function EditGameForm(props) {
 
         setGame({ ...game, [name]: value })
     }
+
+    const handleUploadChange = (e) => {
+        setLoading({ loading: true })
+
+        const uploadData = new FormData()
+        uploadData.append('imageData', e.target.files[0])
+
+        uploadService
+            .uploadImage(uploadData)
+            .then(response => {
+                setGame({ ...game, imageUrl: response.data.cloudinary_url })
+                setLoading({ loading: false })
+            })
+            .catch(err => console.log(err))
+
+    }
+
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -80,11 +103,6 @@ function EditGameForm(props) {
                 <Form.Control onChange={handleInputChange} value={creators} name="creators" type="text" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="imageUrl">
-                <Form.Label>Url de la imagen</Form.Label>
-                <Form.Control onChange={handleInputChange} value={imageUrl} name="imageUrl" type="text" />
-            </Form.Group>
-
             <Form.Group className="mb-3" controlId="github">
                 <Form.Label>Github</Form.Label>
                 <Form.Control onChange={handleInputChange} value={github} name="github" type="text" />
@@ -100,7 +118,13 @@ function EditGameForm(props) {
                 <Form.Control onChange={handleInputChange} value={gameUrl} name="gameUrl" type="text" />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Form.Group className="mb-3" controlId="imageUrl">
+                <Form.Label>Image archive</Form.Label>
+                <Form.Control onChange={handleUploadChange} name="imageData" type="file" />
+            </Form.Group>
+            {loading.loading && <Spinner shape="circle" />}
+
+            <Button disabled={loading.loading} variant="primary" type="submit">
                 Submit
             </Button>
         </Form>

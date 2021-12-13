@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import GameService from '../../../services/game.service'
 import UploadService from '../../../services/upload.service'
@@ -53,7 +53,6 @@ function NewGameForm(props) {
         uploadService
             .uploadImage(uploadData)
             .then (response => {
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",response)
                 setGame({...game, imageUrl: response.data.cloudinary_url})
                 setLoading({loading: false})
             })
@@ -108,7 +107,6 @@ function NewGameForm(props) {
                 <Form.Label>GameUrl</Form.Label>
                 <Form.Control onChange={handleInputChange} value={gameUrl} name="gameUrl" type="text" />
             </Form.Group>
-
 
             <Form.Group className="mb-3" controlId="imageUrl">
                 <Form.Label>Image archive</Form.Label>
