@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import UserService from './services/user.service'
+import UserService from '../../../services/user.service'
 
 const userService = new UserService()
 

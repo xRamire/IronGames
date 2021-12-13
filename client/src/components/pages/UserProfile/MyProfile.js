@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import UserService from '../../../services/user.service'
-import EditProfileForm from "../../../EditProfileForm";
+import EditProfileForm from "./EditProfileForm";
 
 const userService = new UserService()
 

@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import ReviewService from './services/review.service'
+import ReviewService from '../../../services/review.service'
 
 const reviewService = new ReviewService()
 

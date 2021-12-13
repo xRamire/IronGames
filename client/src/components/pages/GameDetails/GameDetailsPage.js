@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
-import EditGameForm from '../../../EditGameForm'
+import EditGameForm from "../GameList/EditGameForm";
 import GameService from '../../../services/game.service'
 import '../GameList/GamePage.css'
 
@@ -55,12 +55,6 @@ function GameDetails(props) {
             })
             .catch(err => console.log(err))
     }, []);
-
-
-
-
-
-
 
     return (
         <div>

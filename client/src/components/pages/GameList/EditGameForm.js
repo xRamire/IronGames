@@ -1,22 +1,30 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import GameService from './services/game.service'
+import GameService from '../../../services/game.service'
 
 const gameService = new GameService()
 
-function NewGameForm(props) {
-    
+function EditGameForm(props) {
+
     const [game, setGame] = useState({
-            title: "",
-            description: "",
-            genre: "",
-            creators: "",
-            imageUrl: "",
-            github: "",
-            date: "",
-            gameUrl: ""
-            // reviews: ""  
-        });
+        _id: "",
+        title: "",
+        description: "",
+        genre: "",
+        creators: "",
+        imageUrl: "",
+        github: "",
+        date: "",
+        gameUrl: "",
+        // reviews: ""  
+    });
+
+
+    useEffect(() => {
+        setGame(props.game)
+    }, []);
+
+
 
     const { title, description, genre, creators, imageUrl, github, date, gameUrl } = game
 
@@ -24,10 +32,11 @@ function NewGameForm(props) {
         e.preventDefault();
 
         gameService
-            .createGame(game)
+            .editGame(game)
             .then(response => {
+                props.setGame(response.data)
                 props.closeModal()
-                props.getAllGames()
+                // props.getGameDetails()
             })
             .catch(err => console.log(err))
     }
@@ -39,21 +48,21 @@ function NewGameForm(props) {
     }
 
     return (
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="title">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control onChange={handleInputChange} value={title} name="title" type="text" />
-                </Form.Group>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="title">
+                <Form.Label>Title</Form.Label>
+                <Form.Control onChange={handleInputChange} value={title} name="title" type="text" />
+            </Form.Group>
 
-                <Form.Group className="mb-3" controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control onChange={handleInputChange} value={description} name="description" type="text" />
-                </Form.Group>
-              
+            <Form.Group className="mb-3" controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control onChange={handleInputChange} value={description} name="description" type="text" />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="genre">
                 <Form.Label>Genre</Form.Label>
-                 <Form.Select aria-label="Default select example" onChange={handleInputChange} name="genre" type="text">
-                    <option>Open this select menu</option>
+                <Form.Select aria-label="Default select example" onChange={handleInputChange} name="genre" type="text">
+                    <option>Actual genre: {genre}</option>
                     <option value="Adventure">Adventure</option>
                     <option value="Fighting">Fighting</option>
                     <option value="Beat'em up">Beat'em up</option>
@@ -99,4 +108,4 @@ function NewGameForm(props) {
 
 }
 
-export default NewGameForm
+export default EditGameForm

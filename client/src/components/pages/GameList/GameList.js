@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Row, Col, Modal, Button } from 'react-bootstrap'
-import NewGameForm from '../../../NewGameForm'
+import NewGameForm from './NewGameForm';
 import GameCard from './GameCard'
 
 function GameList(props) {
