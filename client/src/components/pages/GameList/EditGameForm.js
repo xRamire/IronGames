@@ -20,7 +20,7 @@ function EditGameForm(props) {
         github: "",
         date: "",
         gameUrl: "",
-        // reviews: ""  
+        reviews: ""  
     });
 
     const [loading, setLoading] = useState({ loading: false });

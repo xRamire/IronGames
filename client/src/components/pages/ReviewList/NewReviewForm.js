@@ -9,16 +9,17 @@ function NewReviewForm(props) {
     const [review, setReview] = useState({
             comment: "",
             rating: "",
-            game: ""
+            game: props.game._id,
         });
+
+    const { comment, rating, game } = review
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         reviewService
             .createReview(review)
             .then(response => {
-                props.closeModal()
+                props.closeReviewModal()
                 props.refreshReviews()
             })
             .catch(err => console.log(err))
@@ -34,17 +35,19 @@ function NewReviewForm(props) {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="comment">
                     <Form.Label>Comment</Form.Label>
-                    <Form.Control onChange={handleInputChange} value={review.comment} name="comment" type="text" />
+                    <Form.Control onChange={handleInputChange} value={comment} name="comment" type="text" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="rating">
                     <Form.Label>Rating</Form.Label>
-                    <Form.Control onChange={handleInputChange} value={review.rating} name="rating" type="number" />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="game">
-                    <Form.Label>Game</Form.Label>
-                    <Form.Control onChange={handleInputChange} value={review.genre} name="game" type="text" />
+                    <Form.Select aria-label="Default select example" onChange={handleInputChange} name="rating" type="number">
+                        <option>Rate this game</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Button variant="primary" type="submit">

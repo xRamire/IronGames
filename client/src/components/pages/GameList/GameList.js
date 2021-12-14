@@ -21,7 +21,7 @@ function GameList(props) {
 
     return (
         <div>
-            <Button onClick={openModal}>Add game</Button>
+            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openModal}>Add game</Button>}
             <Modal show={modal.showModal} backdrop="static" onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>New Game</Modal.Title>

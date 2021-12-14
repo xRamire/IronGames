@@ -14,8 +14,8 @@ function GamePlay(props) {
         imageUrl: "",
         github: "",
         date: "",
-        gameUrl: ""
-        // reviews: ""
+        gameUrl: "",
+        reviews: ""
     });
 
     useEffect(() => {

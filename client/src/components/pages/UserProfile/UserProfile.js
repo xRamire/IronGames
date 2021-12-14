@@ -11,7 +11,7 @@ function UserProfile(props) {
         password: "",
         email: "",
         image: "",
-        favs: ""
+        // favs: ""
     });
 
     const { username, password, email, image, favs } = profile
@@ -35,7 +35,7 @@ function UserProfile(props) {
     }, []);
 
     return (
-    <Container>
+    <Container className='padding'>
         <h1>Profile details</h1>
         <Row className="justify-content-around">
             <Col md={6} style={{ overflow: "hidden" }}>
@@ -49,7 +49,7 @@ function UserProfile(props) {
                 </article>
             </Col>
             <Col md={4}>
-                <img src={image} alt='avatar' ></img>
+                <img className='details-img' src={image} alt='avatar' ></img>
             </Col>
         </Row>
     </Container >

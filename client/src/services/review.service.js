@@ -8,9 +8,9 @@ class ReviewService {
 
         })
     }
-    getAllReviews = () => this.app.get("/all")
+    getAllReviews = (id) => this.app.get(`/all/${id}`)
     createReview = (reviewData) => this.app.post("/new", reviewData)
-    editReview = (id) => this.app.put(`/edit/${id}`)
+    editReview = (review) => this.app.put(`/edit/${review._id}`, review)
     deleteReview = (id) => this.app.delete(`/delete/${id}`)
 }
 

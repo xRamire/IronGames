@@ -1,5 +1,7 @@
 const router = require("express").Router()
 const Game = require("../models/Game.model")
+const { isLoggedIn, checkRoles } = require("../middlewares/index")
+
 
 
 router.get("/all", (req, res) => {
@@ -43,7 +45,7 @@ router.put("/edit/:_id", (req, res) => {
         .catch(err => res.status(500).json({ err, errMessage: "Problem editing Game" }))
 })
 
-router.delete("/delete/:id", (req, res) => {
+router.delete("/delete/:id",  (req, res) => {
     const { id } = req.params
 
     Game.findByIdAndDelete(id)

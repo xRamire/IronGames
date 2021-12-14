@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import UserService from '../../../services/user.service'
 import EditProfileForm from "./EditProfileForm";
+import '../UserList/UserPage.css'
 
 const userService = new UserService()
 
 function MyProfile(props) {
-    
+
     const [profile, setProfile] = useState({
-            username: "",
-            password: "",
-            email: "",
-            image: "",
-            favs: ""
-        })
+        _id: "",
+        username: "",
+        password: "",
+        email: "",
+        image: "",
+        favs: ""
+    })
 
     const { username, password, email, image, favs } = profile
 
@@ -24,9 +26,9 @@ function MyProfile(props) {
         userService
             .getMyProfile(id)
             .then(response => {
-                const { username, email, image } = response.data
+                const { username, email, image, _id } = response.data
 
-                setProfile({ username, email, image })
+                setProfile({ username, email, image, _id })
             })
             .catch(err => console.log(err))
     }
@@ -65,11 +67,11 @@ function MyProfile(props) {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <EditProfileForm profile={profile} closeModal={closeModal} setProfile={setProfile} />
+                    <EditProfileForm loggedUser={props.loggedUser} profile={profile} closeModal={closeModal} setProfile={setProfile} getMyProfile={getMyProfile} />
                 </Modal.Body>
             </Modal>
 
-            <Container>
+            <Container className='padding'>
                 <h1>Profile details</h1>
                 <Row className="justify-content-around">
                     <Col md={6} style={{ overflow: "hidden" }}>
@@ -83,12 +85,12 @@ function MyProfile(props) {
                         </article>
                     </Col>
                     <Col md={4}>
-                        <img src={image} alt='avatar' ></img>
+                        <img className='details-img' src={image} alt='avatar' ></img>
                     </Col>
                 </Row>
             </Container >
         </div>
-        )
+    )
 }
 
 export default MyProfile

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import GameService from '../../../services/game.service'
 import SearchBar from '../../layout/SearchBar/SearchBar';
+import GameDetails from '../GameDetails/GameDetailsPage';
 import GameList from "./GameList"
 
 const gameService = new GameService()
 
 function GamePage(props) {
-    
+
     const [games, setGames] = useState([]);
     const [search, setSearch] = useState('');
     const [filteredGames, setFilteredGames] = useState([]);
@@ -24,7 +25,7 @@ function GamePage(props) {
     }
 
     useEffect(() => {
-       getAllGames()
+        getAllGames()
     }, []);
 
     const getSearch = (searchbarInfo) => {
@@ -40,7 +41,7 @@ function GamePage(props) {
         <Container>
             <h1>Game List</h1>
             <SearchBar getSearch={getSearch} />
-            <GameList getAllGames={getAllGames} games={filteredGames} />
+            <GameList loggedUser={props.loggedUser} getAllGames={getAllGames} games={filteredGames} {...props} />
         </Container>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import ReviewService from '../../../services/review.service'
 import SearchBar from '../../layout/SearchBar/SearchBar';
+import GameDetails from '../GameDetails/GameDetailsPage';
 import ReviewList from "./ReviewList"
 
 const reviewService = new ReviewService()
@@ -38,9 +39,10 @@ function ReviewPage(props) {
 
     return (
         <Container>
-            <h1>Game List</h1>
+            <h1>Review List</h1>
             <SearchBar getSearch={getSearch} />
-            <ReviewList getAllGames={getAllReviews} games={filteredReviews} />
+            <ReviewList getAllReviews={getAllReviews} reviews={filteredReviews} />
+            <GameDetails getAllReviews={getAllReviews} reviews={filteredReviews} />
         </Container>
     );
 }

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Modal, Button } from "react-bootstrap";
+import { Container, Row, Col, Modal, Button, Card } from "react-bootstrap";
 import EditGameForm from "../GameList/EditGameForm";
 import GameService from '../../../services/game.service'
 import '../GameList/GamePage.css'
+import NewReviewForm from "../ReviewList/NewReviewForm";
+import { useParams } from "react-router-dom";
+import ReviewService from "../../../services/review.service";
 
 const gameService = new GameService()
+const reviewService = new ReviewService()
 
 function GameDetails(props) {
 
@@ -17,14 +21,28 @@ function GameDetails(props) {
         imageUrl: "",
         github: "",
         date: "",
-        gameUrl: ""
-        // reviews: ""
+        gameUrl: "",
+        reviews: ""
     });
 
     const { title, description, genre, creators, imageUrl, github, date, gameUrl } = game
 
+    const [review, setReview] = useState({
+        _id: "",
+        comment: "",
+        rating: "",
+        game: "",
+        owner: ""
+    });
+
+    const { comment, rating } = review
 
     const [modal, setModal] = useState({ showModal: false });
+
+    const [reviewModal, setReviewModal] = useState({ showReviewModal: false });
+
+    const { showReviewModal } = reviewModal
+
 
     const { showModal } = modal
 
@@ -40,10 +58,24 @@ function GameDetails(props) {
         })
     }
 
+    const closeReviewModal = () => {
+        setReviewModal({
+            showReviewModal: false
+        })
+    }
+
+    const openReviewModal = () => {
+        setReviewModal({
+            showReviewModal: true
+        })
+    }
 
 
     useEffect(() => {
+        
         const { id } = props.match.params
+
+        console.log(props)
 
         gameService
             .getGameDetails(id)
@@ -54,12 +86,27 @@ function GameDetails(props) {
                 setGame({ _id, title, description, genre, creators, imageUrl, github, date, gameUrl })
             })
             .catch(err => console.log(err))
+
+
+
+        reviewService
+            .getAllReviews()
+            .then(response => {
+                console.log(response.data)
+                const { comment, rating, game, owner } = response.data
+
+                setReview ({comment, rating, game, owner})
+            })
+            .catch(err => console.log(err))
+
+
+
     }, []);
 
     return (
         <div>
 
-            <Button onClick={openModal}>Edit</Button>
+            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openModal}>Edit</Button>}
             <Modal show={showModal} backdrop="static" onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Game</Modal.Title>
@@ -70,8 +117,19 @@ function GameDetails(props) {
                 </Modal.Body>
             </Modal>
 
+            {props.loggedUser && <Button onClick={openReviewModal}>Add Review</Button>}
+            <Modal show={showReviewModal} backdrop="static" onHide={closeReviewModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>New Review</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <NewReviewForm game={game} closeReviewModal={closeReviewModal} />
+                </Modal.Body>
+            </Modal>
+
             <Container className='padding'>
-                <Row className="justify-content-around">
+                <Row>
                     <Col md={6} style={{ overflow: "hidden" }}>
                         <article>
                             <h2>{title}</h2>
@@ -92,6 +150,10 @@ function GameDetails(props) {
                     </Col>
                 </Row>
             </Container >
+
+
+
+
         </div>
 
     )

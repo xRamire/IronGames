@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './GamePage.css'
 
-const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, date, gameUrl }) => {
+const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, date, gameUrl, reviews }) => {
     return (
         <Card className="game-card" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={imageUrl} />

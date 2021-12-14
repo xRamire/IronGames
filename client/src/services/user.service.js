@@ -10,8 +10,8 @@ class UserService {
     getAllUsers = () => this.app.get("/all")
     getUserDetails = (id) => this.app.get(`/profile/${id}`)
     getMyProfile = (id) => this.app.get(`/my-profile`)
-    userEdit = (user) => this.app.get(`/edit/${user._id}`, user)
-    userDelete = (id) => this.app.get(`/delete/${id}`)
+    userEdit = (profile) => this.app.put(`/edit/${profile._id}`, profile)
+    userDelete = (id) => this.app.delete(`/delete/${id}`)
 }
 
 export default UserService

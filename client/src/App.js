@@ -17,7 +17,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 const authService = new AuthService()
 
-function App(props) {
+function App() {
 
   const [currentUser, setCurrentUser] = useState({ loggedUser: undefined });
 
@@ -41,14 +41,14 @@ function App(props) {
         <Switch>
           <Route path="/" exact render={() => <Home />} />
 
-          <Route path="/game-list" exact render={() => <GamePage />} />
-          <Route path="/game/details/:id" render={(props) => <GameDetails {...props} />} />
+          <Route path="/game-list" exact render={() => <GamePage loggedUser={loggedUser} />} />
+          <Route path="/game/details/:id" render={(props) => <GameDetails loggedUser={ loggedUser }  {...props} />} />
           <Route path="/game/:id" render={(props) => <GamePlay {...props} />} />
 
           <Route path="/user-list" render={() => <UserPage />} />
-          <Route path="/profile/:id" render={(props) => <UserProfile {...props} />} />
-          <Route path="/my-profile" render={(props) => <MyProfile {...props} />} />
-          
+          <Route path="/profile/:id" render={(props) => <UserProfile {...props} loggedUser={loggedUser} />} />
+          <Route path="/my-profile" render={(props) => <MyProfile loggedUser={loggedUser} {...props} />} />
+
           {loggedUser ?
             <Redirect to="/" />
             :

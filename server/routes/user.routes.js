@@ -17,16 +17,18 @@ router.get("/profile/:id", (req, res) => {
         .catch(err => res.status(500).json({ err, errMessage: "Problem searching this user" }))
 })
 
-router.put("/edit", (req, res) => {
+router.put("/edit/:_id", (req, res) => {
 
-    const { id } = req.query
+    const { _id } = req.params
     const { username, password, email, image, favs } = req.body
 
-    User.findByIdAndUpdate(id, { username, password, email, image, favs }, { new: true })
-        .then((user) => res.status(500).json({ user }))
+    User.findByIdAndUpdate(_id, { username, password, email, image, favs }, { new: true })
+        .then((user) => res.status(200).json(user))
+        .catch(err => res.status(500).json({ err, errMessage: "Problem editing Profile" }))
+
 })
 
-router.delete("/delete", (req, res) => {
+router.delete("/delete",  (req, res) => {
 
     const { id } = req.query
 
