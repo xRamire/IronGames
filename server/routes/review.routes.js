@@ -8,6 +8,7 @@ router.get("/all/:id", (req, res) => {
     const { id } = req.params
 
     Review.find({game: id})
+        .populate('game owner')
         .then(allGames => res.json(allGames))
         .catch(err => res.status(500).json({ err, errMessage: "Problem finding Reviews" }))
 })

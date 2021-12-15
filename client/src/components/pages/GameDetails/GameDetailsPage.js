@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Modal, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Modal, Button, Link } from "react-bootstrap";
 import EditGameForm from "../GameList/EditGameForm";
 import GameService from '../../../services/game.service'
 import '../GameList/GamePage.css'
 import NewReviewForm from "../ReviewList/NewReviewForm";
 import { useParams } from "react-router-dom";
 import ReviewService from "../../../services/review.service";
+import ReviewList from "../ReviewList/ReviewList";
 
 const gameService = new GameService()
 const reviewService = new ReviewService()
@@ -27,15 +28,9 @@ function GameDetails(props) {
 
     const { title, description, genre, creators, imageUrl, github, date, gameUrl } = game
 
-    const [review, setReview] = useState({
-        _id: "",
-        comment: "",
-        rating: "",
-        game: "",
-        owner: ""
-    });
+    const [reviews, setReviews] = useState([]);
+    const { id } = props.match.params
 
-    const { comment, rating } = review
 
     const [modal, setModal] = useState({ showModal: false });
 
@@ -70,12 +65,8 @@ function GameDetails(props) {
         })
     }
 
+    const getGameDetails = () => {
 
-    useEffect(() => {
-        
-        const { id } = props.match.params
-
-        console.log(props)
 
         gameService
             .getGameDetails(id)
@@ -86,22 +77,34 @@ function GameDetails(props) {
                 setGame({ _id, title, description, genre, creators, imageUrl, github, date, gameUrl })
             })
             .catch(err => console.log(err))
+    }
 
 
-
+    const getAllReviews = () => {
         reviewService
-            .getAllReviews()
+            .getAllReviews(id)
             .then(response => {
-                console.log(response.data)
-                const { comment, rating, game, owner } = response.data
-
-                setReview ({comment, rating, game, owner})
+                const reviews = response.data
+                setReviews(reviews)
             })
             .catch(err => console.log(err))
+    }
 
+    useEffect(() => {
+
+        getGameDetails()
+        getAllReviews()
 
 
     }, []);
+    
+
+    // const gameDelete = () => {
+    //     gameService.deleteGame(id)
+    //         .then(response => (null))
+    //         .catch(err => console.log(err))
+    // }
+
 
     return (
         <div>
@@ -128,6 +131,9 @@ function GameDetails(props) {
                 </Modal.Body>
             </Modal>
 
+
+            {/* {props.loggedUser?.role === 'ADMIN' && <Link as={Link} to='/' onClick={}>Logout</Link>} */}
+
             <Container className='padding'>
                 <Row>
                     <Col md={6} style={{ overflow: "hidden" }}>
@@ -149,6 +155,8 @@ function GameDetails(props) {
                         <img className='details-img' src={imageUrl} alt={title} ></img>
                     </Col>
                 </Row>
+
+                <ReviewList reviews={reviews}/>
             </Container >
 
 

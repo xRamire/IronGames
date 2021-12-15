@@ -1,53 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap'
-import ReviewService from '../../../services/review.service'
-import SearchBar from '../../layout/SearchBar/SearchBar';
-import GameDetails from '../GameDetails/GameDetailsPage';
-import ReviewList from "./ReviewList"
+// import React, { useState, useEffect } from 'react';
+// import { Container } from 'react-bootstrap'
+// import ReviewService from '../../../services/review.service'
+// import SearchBar from '../../layout/SearchBar/SearchBar';
+// import GameDetails from '../GameDetails/GameDetailsPage';
+// import ReviewList from "./ReviewList"
 
-const reviewService = new ReviewService()
+// const reviewService = new ReviewService()
 
-function ReviewPage(props) {
+// function ReviewPage(props) {
 
-    const [reviews, setReviews] = useState([]);
-    const [search, setSearch] = useState('');
-    const [filteredReviews, setFilteredReviews] = useState([]);
+//     const [search, setSearch] = useState('');
+//     const [filteredReviews, setFilteredReviews] = useState([]);
 
-    const getAllReviews = () => {
-        reviewService
-            .getAllReviews()
-            .then(response => {
-                const reviews = response.data
-                setReviews(reviews)
-                setFilteredReviews(reviews)
-            })
-            .catch(err => console.log(err))
-    }
 
-    useEffect(() => {
-        getAllReviews()
-    }, []);
 
-    const getSearch = (searchbarInfo) => {
-        setSearch(searchbarInfo);
-    };
+//     // useEffect(() => {
+//     //     getAllReviews()
+//     // }, []);
 
-    useEffect(() => {
-        let filteredReviews = reviews.filter((review) => review.title.toLowerCase().includes(search));
-        setFilteredReviews(filteredReviews);
-    }, [search]);
+//     const getSearch = (searchbarInfo) => {
+//         setSearch(searchbarInfo);
+//     };
 
-    return (
-        <Container>
-            <h1>Review List</h1>
-            <SearchBar getSearch={getSearch} />
-            <ReviewList getAllReviews={getAllReviews} reviews={filteredReviews} />
-            <GameDetails getAllReviews={getAllReviews} reviews={filteredReviews} />
-        </Container>
-    );
-}
+//     useEffect(() => {
+//         let filteredReviews = reviews.filter((review) => review.title.toLowerCase().includes(search));
+//         setFilteredReviews(filteredReviews);
+//     }, [search]);
 
-export default ReviewPage
+//     return (
+//         <Container>
+//             <h1>Review List</h1>
+//             <SearchBar getSearch={getSearch} />
+//             <ReviewList getAllReviews={getAllReviews} reviews={filteredReviews} />
+//             <GameDetails getAllReviews={getAllReviews} reviews={filteredReviews} />
+//         </Container>
+//     );
+// }
+
+// export default ReviewPage
 
 
 
