@@ -61,7 +61,7 @@ function App() {
 
         </Switch>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 
