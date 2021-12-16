@@ -68,19 +68,18 @@ function UserProfile(props) {
             <Button className="buttons" onClick={openUserDeleteModal}>Delete this account</Button>
             <Modal show={showUserDeleteModal} backdrop="static" onHide={closeUserDeleteModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>This user will be deleted, are you sure?</Modal.Title>
+                    <Modal.Title>This account will be deleted, are you sure?</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                        {props.loggedUser && <Link as={Link} to='/user-list' onClick={userDelete} closeReviewModal={closeUserDeleteModal}><Button>Delete this account</Button></Link>}
+                        {props.loggedUser && <Link as={Link} to='/user-list' onClick={userDelete} closeReviewModal={closeUserDeleteModal}><Button>Confirm</Button></Link>}
                 </Modal.Body>
             </Modal>
         </Container>
 
 
 
-        <Container className='padding'>
-            
+        <Container className='padding'>  
             <Row>
                 <Col md={6} style={{ overflow: "hidden" }}>
                     <h1>Profile details</h1>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import './ReviewPage.css'
+import './ReviewCard.css'
 
 const ReviewCard = ({ _id, comment, game, rating, owner, loggedUser, reviewDelete}) => {
 
@@ -20,23 +20,12 @@ const ReviewCard = ({ _id, comment, game, rating, owner, loggedUser, reviewDelet
 
 
     return (
-        <Card className="game-card" style={{ width: '18rem' }}>
+        <Card className="review-card" style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={owner.image} />
             <Card.Body>
                 <Card.Title>{owner.username}</Card.Title>
-                <Card.Img className='review-img' variant="top" src={owner.image} />
                 <Card.Text><b>{rating}</b></Card.Text>
                 <Card.Text>{comment}</Card.Text>
-
-                {loggedUser?.role === 'ADMIN' && <Button onClick={openReviewDeleteModal}>Delete Review</Button>}
-                <Modal show={showReviewDeleteModal} backdrop="static" onHide={closeReviewDeleteModal}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>This will delete the review, are you sure?</Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        {loggedUser?.role === 'ADMIN' && <Button onClick={reviewDelete} closeReviewModal={closeReviewDeleteModal}>Delete Review</Button>}
-                    </Modal.Body>
-                </Modal>
             </Card.Body>
         </Card>
     )

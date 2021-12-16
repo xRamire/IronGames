@@ -94,11 +94,11 @@ function MyProfile(props) {
                 <Button className="buttons" onClick={openUserDeleteModal}>Delete my account</Button>
                 <Modal show={showUserDeleteModal} backdrop="static" onHide={closeUserDeleteModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Edit Profile</Modal.Title>
+                        <Modal.Title>Your account will be deleted, are you sure?</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        {props.loggedUser && <Link as={Link} to='/' onClick={userDelete} closeReviewModal={closeUserDeleteModal}> <Button>Delete my account</Button> </Link>}
+                        {props.loggedUser && <Link as={Link} to='/' onClick={userDelete} closeReviewModal={closeUserDeleteModal}> <Button>Confirm</Button> </Link>}
                     </Modal.Body>
                 </Modal>
             </Container>

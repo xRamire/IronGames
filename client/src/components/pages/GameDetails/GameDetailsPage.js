@@ -35,9 +35,6 @@ function GameDetails(props) {
     const [reviews, setReviews] = useState([]);
     const { id } = props.match.params
 
-    // const [isFavorite, setIsFavorite] = useState(false)
-    // console.log('IS FVORITE????????????????', isFavorite)
-
     const [editModal, setEditModal] = useState({ showEditModal: false });
     const { showEditModal } = editModal
     const closeEditModal = () => {
@@ -150,43 +147,42 @@ function GameDetails(props) {
 
     return (
         <div>
+            <Container>
+                {props.loggedUser?.role === 'ADMIN' && <Button className="buttons" onClick={openEditModal}>Edit</Button>}
+                <Modal show={showEditModal} backdrop="static" onHide={closeEditModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Game</Modal.Title>
+                    </Modal.Header>
 
-            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openEditModal}>Edit</Button>}
-            <Modal show={showEditModal} backdrop="static" onHide={closeEditModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Game</Modal.Title>
-                </Modal.Header>
+                    <Modal.Body>
+                        <EditGameForm game={game} closeModal={closeEditModal} setGame={setGame} />
+                    </Modal.Body>
+                </Modal>
 
-                <Modal.Body>
-                    <EditGameForm game={game} closeModal={closeEditModal} setGame={setGame} />
-                </Modal.Body>
-            </Modal>
+                {props.loggedUser && <Button className="buttons" onClick={openReviewModal}>Add Review</Button>}
+                <Modal show={showReviewModal} backdrop="static" onHide={closeReviewModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>New Review</Modal.Title>
+                    </Modal.Header>
 
-            {props.loggedUser && <Button onClick={openReviewModal}>Add Review</Button>}
-            <Modal show={showReviewModal} backdrop="static" onHide={closeReviewModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>New Review</Modal.Title>
-                </Modal.Header>
+                    <Modal.Body>
+                        <NewReviewForm game={game} closeReviewModal={closeReviewModal} getAllReviews={getAllReviews} />
+                    </Modal.Body>
+                </Modal>
 
-                <Modal.Body>
-                    <NewReviewForm game={game} closeReviewModal={closeReviewModal} getAllReviews={getAllReviews} />
-                </Modal.Body>
-            </Modal>
+                {props.loggedUser?.role === 'ADMIN' && <Button className="buttons" onClick={openGameDeleteModal}>Delete Game</Button>}
+                <Modal show={showGameDeleteModal} backdrop="static" onHide={closeGameDeleteModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>This game will be deleted, are you sure?</Modal.Title>
+                    </Modal.Header>
 
-            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openGameDeleteModal}>Delete Game</Button>}
-            <Modal show={showGameDeleteModal} backdrop="static" onHide={closeGameDeleteModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>This will delete the game, are you sure?</Modal.Title>
-                </Modal.Header>
+                    <Modal.Body>
+                        {props.loggedUser?.role === 'ADMIN' && <Link to='/game-list' onClick={gameDelete} closeReviewModal={closeGameDeleteModal}> <Button>Confirm</Button></Link>}
+                    </Modal.Body>
+                </Modal>
 
-                <Modal.Body>
-                    {props.loggedUser?.role === 'ADMIN' && <Link to='/game-list' onClick={gameDelete} closeReviewModal={closeGameDeleteModal}>Delete Game</Link>}
-                </Modal.Body>
-            </Modal>
-
-            {
-                props.loggedUser?.favs.includes(game._id) ? <Button onClick={gameUnfav}>Delete from Favorites</Button> : <Button onClick={gameFav}>Add to Favorites</Button>
-            }
+                {props.loggedUser?.favs.includes(game._id) ? <Button className="buttons" onClick={gameUnfav}>Delete from Favorites</Button> : <Button className="buttons" onClick={gameFav}>Add to Favorites</Button>}
+            </Container>
 
 
             <Container className='padding'>
@@ -197,22 +193,25 @@ function GameDetails(props) {
                             <div>
                                 <p>{description}</p>
                                 <hr />
-                                <br />
-                                <p>Genre: {genre}</p>
-                                <p>Made by: {creators}</p>
-                                <p>Published on: {new Date(date).toDateString()}</p>
-                                <p><a href={github}>Github</a></p>
-                                <Link to={`/game/${game._id}`}><Button variant="primary">Play</Button></Link>              
+                                <p><b>Genre:</b> {genre}</p>
+                                <p><b>Made by:</b> {creators}</p>
+                                <p><b>Published on:</b> {new Date(date).toDateString()}</p>
+                                <p><a className="github" href={github}><b>Github</b></a></p>
+                                <Link to={`/game/${game._id}`}><Button variant="primary">Play Now!</Button></Link>              
                             </div>
                         </article>
                     </Col>
-                    <Col md={4}>
-                        <img className='details-img' src={imageUrl} alt={title} ></img>
+                    <Col className="padding-img" md={4}>
+                        <img className='game-details-img' src={imageUrl} alt={title} ></img>
                     </Col>
                 </Row>
 
+            </Container>
+            <Container className="reviews">
+                <h2>Reviews</h2>
+                <hr />
                 <ReviewList reviews={reviews} reviewDelete={reviewDelete} loggedUser={props.loggedUser} />
-            </Container >
+            </Container>
 
 
 
