@@ -23,8 +23,8 @@ const ReviewCard = ({ _id, comment, game, rating, owner, loggedUser, reviewDelet
         <Card className="game-card" style={{ width: '18rem' }}>
             <Card.Body>
                 <Card.Title>{owner.username}</Card.Title>
-                <Card.Text><img className='review-img' src={owner.image} alt='avatar' ></img></Card.Text>
-                <Card.Text>{rating}</Card.Text>
+                <Card.Img className='review-img' variant="top" src={owner.image} />
+                <Card.Text><b>{rating}</b></Card.Text>
                 <Card.Text>{comment}</Card.Text>
 
                 {loggedUser?.role === 'ADMIN' && <Button onClick={openReviewDeleteModal}>Delete Review</Button>}

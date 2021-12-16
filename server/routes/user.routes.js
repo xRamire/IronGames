@@ -13,6 +13,7 @@ router.get("/profile/:id", (req, res) => {
     const { id } = req.params
 
     User.findById(id)
+        .populate('favs')
         .then(theUser => res.json(theUser))
         .catch(err => res.status(500).json({ err, errMessage: "Problem searching this user" }))
 })

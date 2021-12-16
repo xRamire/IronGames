@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container } from "react-bootstrap";
 import GameService from '../../../services/game.service'
+import "./GamePage.css"
 
 const gameService = new GameService()
 
@@ -19,9 +20,8 @@ function GamePlay(props) {
     });
 
     useEffect(() => {
-        
-        const { id } = props.match.params
 
+        const { id } = props.match.params
         gameService
             .getOneGame(id)
             .then(response => {
@@ -30,14 +30,20 @@ function GamePlay(props) {
                 setGame({ title, description, genre, creators, imageUrl, github, date, gameUrl })
             })
             .catch(err => console.log(err))
+
+
+
     }, []);
-    
+
+
+
 
     return (
-        <Container>
-            <iframe id={game.gameUrl} title={game.title} style={{marginLeft:'-15vh', width: "100%", height: "100vh"}} src={game.gameUrl}></iframe>
-        </Container >
+        <div className="game-wrap">
+            <iframe className="game-frame" title={game.title} src={game.gameUrl}></iframe>
+        </div>
     )
 }
 
 export default GamePlay
+

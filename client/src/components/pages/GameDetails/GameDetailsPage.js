@@ -180,7 +180,7 @@ function GameDetails(props) {
                 </Modal.Header>
 
                 <Modal.Body>
-                    {props.loggedUser?.role === 'ADMIN' && <Link to='/' onClick={gameDelete} closeReviewModal={closeGameDeleteModal}>Delete Game</Link>}
+                    {props.loggedUser?.role === 'ADMIN' && <Link to='/game-list' onClick={gameDelete} closeReviewModal={closeGameDeleteModal}>Delete Game</Link>}
                 </Modal.Body>
             </Modal>
 
@@ -202,7 +202,7 @@ function GameDetails(props) {
                                 <p>Made by: {creators}</p>
                                 <p>Published on: {new Date(date).toDateString()}</p>
                                 <p><a href={github}>Github</a></p>
-                                <p><a href={gameUrl}>Play</a></p>
+                                <Link to={`/game/${game._id}`}><Button variant="primary">Play</Button></Link>              
                             </div>
                         </article>
                     </Col>

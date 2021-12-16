@@ -14,7 +14,7 @@ function UserProfile(props) {
         password: "",
         email: "",
         image: "",
-        favs: ""
+        favs: []
     });
 
     const { username, password, email, image, favs } = profile
@@ -87,7 +87,14 @@ function UserProfile(props) {
                             <p>{email}</p>
                             <hr />
                             <br />
-                            <p>{favs}</p>
+                            <p>{favs.map(elm => {
+                                    
+                                    return (
+                                        <ul>
+                                            <li>{elm.title}</li>
+                                        </ul>
+                                    )
+                                })}</p>
                         </div>
                     </article>
                 </Col>

@@ -10,17 +10,17 @@ const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, 
             <Card.Body>
                 <Card.Title> {title}</Card.Title>
                 <Card.Text>
-                    {description}.
+                    {description}
                 </Card.Text>
                 <Card.Text>
-                    {genre}.
+                    {genre}
                 </Card.Text>
                 <Card.Text>
-                    {creators}.
+                    {creators}
                 </Card.Text>
 
                 <Link to={`/game/${_id}`}>
-                    <Button variant="primary">Jugar</Button>
+                    <Button variant="primary">Play</Button>
                 </Link>
 
                 <Link to={`/game/details/${_id}`}>
