@@ -3,7 +3,7 @@ import axios from 'axios'
 class GameService {
     constructor() {
         this.app = axios.create({
-            baseURL: 'process.env.REACT_APP_BASE_URL',
+            baseURL: `${process.env.REACT_APP_BASE_URL}/games`,
             withCredentials: true
 
         })
