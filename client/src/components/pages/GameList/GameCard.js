@@ -1,4 +1,4 @@
-import React from 'react'
+    import React from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './GameCard.css'
@@ -8,16 +8,10 @@ const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, 
         <Card className="game-card" style={{ width: '18rem' }}>
             <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
-                <Card.Title> {title}</Card.Title>
-                <Card.Text>
-                    {description}
-                </Card.Text>
-                <Card.Text>
-                    {genre}
-                </Card.Text>
-                <Card.Text>
-                    {creators}
-                </Card.Text>
+                <Card.Title>{title}</Card.Title>
+                <Card.Text>{description}</Card.Text>
+                <Card.Text>{genre}</Card.Text>
+                <Card.Text>{creators}</Card.Text>
             
                 <div className='card-button'>
                     <Link to={`/game/${_id}`}>

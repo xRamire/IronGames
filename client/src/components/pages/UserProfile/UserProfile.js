@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import UserService from '../../../services/user.service'
-import EditProfileForm from "./EditProfileForm";
 import { Link } from 'react-router-dom'
+import './Profile.css'
 
 
 const userService = new UserService()
@@ -64,45 +64,49 @@ function UserProfile(props) {
     return (
         
     <div>
+        <Container>
+            <Button className="buttons" onClick={openUserDeleteModal}>Delete this account</Button>
+            <Modal show={showUserDeleteModal} backdrop="static" onHide={closeUserDeleteModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>This user will be deleted, are you sure?</Modal.Title>
+                </Modal.Header>
 
-        <Button onClick={openUserDeleteModal}>Delete my Profile</Button>
-        <Modal show={showUserDeleteModal} backdrop="static" onHide={closeUserDeleteModal}>
-            <Modal.Header closeButton>
-                <Modal.Title>This user will be deleted, are you sure?</Modal.Title>
-            </Modal.Header>
+                <Modal.Body>
+                        {props.loggedUser && <Link as={Link} to='/user-list' onClick={userDelete} closeReviewModal={closeUserDeleteModal}><Button>Delete this account</Button></Link>}
+                </Modal.Body>
+            </Modal>
+        </Container>
 
-            <Modal.Body>
-                {props.loggedUser && <Link as={Link} to='/' onClick={userDelete} closeReviewModal={closeUserDeleteModal}>Delete Profile</Link>}
-            </Modal.Body>
-        </Modal>
 
 
         <Container className='padding'>
-            <h1>Profile details</h1>
-            <Row className="justify-content-around">
+            
+            <Row>
                 <Col md={6} style={{ overflow: "hidden" }}>
+                    <h1>Profile details</h1>
+                    <hr />
                     <article>
-                        <h2>{username}</h2>
+                        <h3>{username}</h3>
                         <div>
-                            <p>{email}</p>
+                            {props.loggedUser?.role === 'ADMIN' && <p>{email}</p>}
                             <hr />
-                            <br />
+                            <h4>Favorite games</h4>
                             <p>{favs.map(elm => {
                                     
-                                    return (
-                                        <ul>
-                                            <li>{elm.title}</li>
-                                        </ul>
-                                    )
-                                })}</p>
+                                return (
+                                    <ul>
+                                        <li>{elm.title}</li>
+                                    </ul>
+                                )
+                            })}</p>
                         </div>
                     </article>
                 </Col>
-                <Col md={4}>
-                    <img className='details-img' src={image} alt='avatar' ></img>
+                <Col className="padding-img" md={4}>
+                    <img className='profile-img' src={image} alt='avatar' ></img>
                 </Col>
             </Row>
-        </Container >
+        </Container>
 
     </div>
 )

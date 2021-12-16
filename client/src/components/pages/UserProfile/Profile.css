@@ -1,0 +1,15 @@
+
+.buttons {
+margin-top: 10px;
+margin-right: 10px;
+}
+
+.profile-img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.padding-img {
+    margin-left: 100px;
+}

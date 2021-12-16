@@ -2,12 +2,12 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import UserCard from './UserCard'
 
-function UserList({users}) {
+function UserList({users, loggedUser}) {
     
     return (
         <div>
             <Row>
-                {users.map(elm => <Col key={elm._id}><UserCard {...elm} /></Col>)}
+                {users.map(elm => <Col key={elm._id}><UserCard loggedUser={loggedUser} {...elm} /></Col>)}
             </Row>
         </div>
     )

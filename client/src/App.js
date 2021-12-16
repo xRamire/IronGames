@@ -45,7 +45,7 @@ function App() {
           <Route path="/game/details/:id" render={(props) => <GameDetails loggedUser={loggedUser} storeUser={storeUser} {...props} />} />
           <Route path="/game/:id" render={(props) => <GamePlay {...props} />} />
 
-          <Route path="/user-list" render={() => <UserPage />} />
+          <Route path="/user-list" render={(props) => <UserPage loggedUser={loggedUser} {...props} />} />
           <Route path="/profile/:id" render={(props) => <UserProfile {...props} loggedUser={loggedUser} />} />
           <Route path="/my-profile" render={(props) => <MyProfile loggedUser={loggedUser} storeUser={storeUser} {...props} />} />
 

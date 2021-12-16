@@ -1,8 +1,8 @@
-.details-img {
-    height: 50vh;
-    width: 100%;
-}
-
-.padding {
-    padding-top: 2vh;
+.div-user-content {
+    display: flex;
+    align-content: space-around;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 10px;
 }

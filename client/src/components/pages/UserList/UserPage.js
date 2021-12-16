@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import UserService from '../../../services/user.service'
 import UserList from "./UserList"
 import SearchBar from "../../layout/SearchBar/SearchBar"
+import './UserPage.css'
 
 const userService = new UserService()
 
@@ -38,9 +39,12 @@ function UserPage(props) {
 
     return (
         <Container>
-            <h1>User List</h1>
-            <SearchBar getSearch={getSearch} />
-            <UserList getAllUsers={getAllUsers} users={filteredUsers} />
+            <div className='div-user-content'>
+                <h1>User List</h1>
+                <SearchBar getSearch={getSearch} />
+            </div>
+
+            <UserList getAllUsers={getAllUsers} users={filteredUsers} loggedUser={props.loggedUser} />
         </Container>
     );
 }
