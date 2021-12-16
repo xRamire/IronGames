@@ -1,0 +1,21 @@
+.game-card {
+    margin-bottom: 40px;
+}
+
+.game-card h3 {
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+.game-card img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+
+
+.card-button {
+    display: flex;
+    justify-content: space-around;
+}

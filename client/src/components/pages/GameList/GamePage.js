@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import GameService from '../../../services/game.service'
 import SearchBar from '../../layout/SearchBar/SearchBar';
-import GameDetails from '../GameDetails/GameDetailsPage';
 import GameList from "./GameList"
+import './GamePage.css'
 
 const gameService = new GameService()
 
@@ -39,8 +39,10 @@ function GamePage(props) {
 
     return (
         <Container>
-            <h1>Game List</h1>
-            <SearchBar getSearch={getSearch} />
+            <div className='div-content'>
+                <h1>Game List</h1>
+                <SearchBar className='search' getSearch={getSearch} />
+            </div>
             <GameList loggedUser={props.loggedUser} getAllGames={getAllGames} games={filteredGames} {...props} />
         </Container>
     );

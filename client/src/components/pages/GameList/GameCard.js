@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import './GamePage.css'
+import './GameCard.css'
 
 const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, date, gameUrl, reviews }) => {
     return (
@@ -18,14 +18,16 @@ const GameCard = ({ _id, title, description, genre, creators, imageUrl, github, 
                 <Card.Text>
                     {creators}
                 </Card.Text>
+            
+                <div className='card-button'>
+                    <Link to={`/game/${_id}`}>
+                        <Button variant="primary">Lets Play!</Button>
+                    </Link>
 
-                <Link to={`/game/${_id}`}>
-                    <Button variant="primary">Play</Button>
-                </Link>
-
-                <Link to={`/game/details/${_id}`}>
-                    <Button variant="primary">Details</Button>
-                </Link>
+                    <Link to={`/game/details/${_id}`}>
+                        <Button variant="secondary">Details</Button>
+                    </Link>
+                </div>
             </Card.Body>
         </Card>
     )

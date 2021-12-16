@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import EditGameForm from "../GameList/EditGameForm";
 import GameService from '../../../services/game.service'
-import '../GameList/GamePage.css'
+import './GameDetailsPage.css'
 import NewReviewForm from "../ReviewList/NewReviewForm";
 import { useParams } from "react-router-dom";
 import ReviewService from "../../../services/review.service";

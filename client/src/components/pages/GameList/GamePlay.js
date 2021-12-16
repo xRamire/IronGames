@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Container } from "react-bootstrap";
 import GameService from '../../../services/game.service'
-import "./GamePage.css"
+import "./GamePlay.css"
 
 const gameService = new GameService()
 

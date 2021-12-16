@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchBar.css'
 
 function SearchBar(props) { 
 
@@ -8,10 +9,10 @@ function SearchBar(props) {
     };
 
     return (
-        <div><label>
+        <div><label className='search'>
                 Search:
-                <input onChange={(e) => handleSearchChange(e)} name="name" type="text"/>
             </label>
+            <input className='search-bar' onChange={(e) => handleSearchChange(e)} name="name" type="text" />
         </div>
     );
 }

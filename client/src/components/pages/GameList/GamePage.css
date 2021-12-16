@@ -1,49 +1,7 @@
-.game-card {
-    margin-bottom: 40px;
-}
-
-.game-card h3 {
-    margin-top: 10px;
-    font-weight: 300;
-}
-
-.game-card img {
-    height: 200px;
-    object-fit: cover;
-    width: 100%;
-}
-
-.btn-block {
-    width: 100%;
-}
-
-
-.padding {
-    padding-top: 2vh;
-}
-
-.game-wrap {
-    width: 90vw;
-    height: 90vh;
-    padding: 0;
-    overflow: hidden;
-    margin: 0 auto;
-}
-.game-frame {
-
-    height: 100%;
-    width: 100%;
-    position:fixed;
-    border: 0;
-    -ms-transform: scale(0.25);
-    -moz-transform: scale(0.25);
-    -o-transform: scale(0.25);
-    -webkit-transform: scale(0.25);
-    transform: scale(0.9);
-
-    -ms-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
+.div-content {
+    display: flex;
+    align-content: space-around;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
 }
