@@ -3,8 +3,11 @@ import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import UserService from '../../../services/user.service'
 import EditProfileForm from "./EditProfileForm";
 import '../UserList/UserPage.css'
+import { Link } from 'react-router-dom'
+
 
 const userService = new UserService()
+
 
 function MyProfile(props) {
 
@@ -14,21 +17,21 @@ function MyProfile(props) {
         password: "",
         email: "",
         image: "",
-        favs: ""
+        favs: []
     })
+    const { id } = props.match.params
+
 
     const { username, password, email, image, favs } = profile
 
     const getMyProfile = () => {
 
-        const { id } = props.match.params
-
         userService
             .getMyProfile(id)
             .then(response => {
-                const { username, email, image, _id } = response.data
+                const { username, email, image, _id, favs } = response.data
 
-                setProfile({ username, email, image, _id })
+                setProfile({ username, email, image, _id, favs })
             })
             .catch(err => console.log(err))
     }
@@ -39,35 +42,64 @@ function MyProfile(props) {
 
 
 
-    const [modal, setModal] = useState({ showModal: false });
-
-    const { showModal } = modal
-
-    const closeModal = () => {
-        setModal({
-            showModal: false
+    const [editModal, setEditModal] = useState({ showEditModal: false });
+    const { showEditModal } = editModal
+    const closeEditModal = () => {
+        setEditModal({
+            showEditModal: false
         })
     }
 
-    const openModal = () => {
-        setModal({
-            showModal: true
+    const openEditModal = () => {
+        setEditModal({
+            showEditModal: true
         })
     }
 
+    const [userDeleteModal, setUserDeleteModal] = useState({ showUserDeleteModal: false });
+    const { showUserDeleteModal } = userDeleteModal
+    const closeUserDeleteModal = () => {
+        setUserDeleteModal({
+            showUserDeleteModal: false
+        })
+    }
+    const openUserDeleteModal = () => {
+        setUserDeleteModal({
+            showUserDeleteModal: true
+        })
+    }
+
+    const userDelete = () => {
+
+        userService
+        .userDelete(props.loggedUser._id)
+            .then(response => (null))
+            .catch(err => console.log(err))
+    }
 
 
 
     return (
         <div>
-            <Button onClick={openModal}>Edit</Button>
-            <Modal show={showModal} backdrop="static" onHide={closeModal}>
+            <Button onClick={openEditModal}>Edit</Button>
+            <Modal show={showEditModal} backdrop="static" onHide={closeEditModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Profile</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <EditProfileForm loggedUser={props.loggedUser} profile={profile} closeModal={closeModal} setProfile={setProfile} getMyProfile={getMyProfile} />
+                    <EditProfileForm loggedUser={props.loggedUser} profile={profile} closeModal={closeEditModal} setProfile={setProfile} getMyProfile={getMyProfile} />
+                </Modal.Body>
+            </Modal>
+
+            <Button onClick={openUserDeleteModal}>Delete my Profile</Button>
+            <Modal show={showUserDeleteModal} backdrop="static" onHide={closeUserDeleteModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Profile</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    {props.loggedUser && <Link as={Link} to='/' onClick={userDelete}  closeReviewModal={closeUserDeleteModal}>Delete my Profile</Link>}
                 </Modal.Body>
             </Modal>
 
@@ -81,6 +113,14 @@ function MyProfile(props) {
                                 <p>{email}</p>
                                 <hr />
                                 <br />
+                                <p>{favs.map(elm => {
+                                    
+                                    return (
+                                        <ul>
+                                            <li>{elm.title}</li>
+                                        </ul>
+                                    )
+                                })}</p>
                             </div>
                         </article>
                     </Col>

@@ -42,12 +42,12 @@ function App() {
           <Route path="/" exact render={() => <Home />} />
 
           <Route path="/game-list" exact render={() => <GamePage loggedUser={loggedUser} />} />
-          <Route path="/game/details/:id" render={(props) => <GameDetails loggedUser={ loggedUser }  {...props} />} />
+          <Route path="/game/details/:id" render={(props) => <GameDetails loggedUser={loggedUser} storeUser={storeUser} {...props} />} />
           <Route path="/game/:id" render={(props) => <GamePlay {...props} />} />
 
           <Route path="/user-list" render={() => <UserPage />} />
           <Route path="/profile/:id" render={(props) => <UserProfile {...props} loggedUser={loggedUser} />} />
-          <Route path="/my-profile" render={(props) => <MyProfile loggedUser={loggedUser} {...props} />} />
+          <Route path="/my-profile" render={(props) => <MyProfile loggedUser={loggedUser} storeUser={storeUser} {...props} />} />
 
           {loggedUser ?
             <Redirect to="/" />

@@ -28,9 +28,9 @@ router.put("/edit/:_id", (req, res) => {
 
 })
 
-router.delete("/delete",  (req, res) => {
+router.delete("/delete/:id",  (req, res) => {
 
-    const { id } = req.query
+    const { id } = req.params
 
     User.findByIdAndDelete(id)
         .then(info => res.json({ info }))
@@ -43,8 +43,43 @@ router.get("/my-profile", isLoggedIn, (req, res) => {
     const id = currentUser._id
 
     User.findById(id)
+        .populate('favs')
         .then(theUser => res.json(theUser))
         .catch(err => res.status(500).json({ err, errMessage: "Problem searching this user" }))
 })
+
+router.put("/favs/fav/:id", isLoggedIn, (req, res) => {
+
+    const currentUser = req.session.currentUser
+    const userId = currentUser._id
+
+
+    const { id } = req.params
+    const { favs } = req.body
+
+
+    User.findByIdAndUpdate(userId, { $push: { favs: id } }, { new: true })
+        .then(fav => res.json(fav))
+        .catch(err => console.log(err))
+
+})
+
+router.put("/favs/unfav/:id", isLoggedIn, (req, res) => {
+
+    const currentUser = req.session.currentUser
+    const userId = currentUser._id
+
+    const { id } = req.params
+    const { favs } = req.body
+
+    //DONE PULL PARA SACAR EL PUSH
+
+    User.findByIdAndUpdate(userId, { $pull: { favs: id } }, { new: true })
+        .then(unFav => res.json(unFav))
+        .catch(err => console.log(err))
+
+})
+
+
 
 module.exports = router

@@ -35,7 +35,6 @@ function EditProfileForm(props) {
         userService
             .userEdit(profile)
             .then(response => {
-                console.log("aaaaaaaaaa", response.data)
                 props.setProfile(response.data)
                 props.closeModal()
             })

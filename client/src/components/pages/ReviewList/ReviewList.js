@@ -11,7 +11,7 @@ function ReviewList(props) {
             props.reviews.map(elm => {
                 return (
                     <Col key={elm._id}>
-                        <ReviewCard  {...elm} />
+                        <ReviewCard loggedUser={props.loggedUser} reviewDelete={props.reviewDelete} {...elm} />
                     </Col>
                 )
             })

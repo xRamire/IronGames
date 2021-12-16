@@ -19,8 +19,8 @@ function NewReviewForm(props) {
         reviewService
             .createReview(review)
             .then(response => {
+                props.getAllReviews()
                 props.closeReviewModal()
-                props.refreshReviews()
             })
             .catch(err => console.log(err))
     }
@@ -40,7 +40,7 @@ function NewReviewForm(props) {
 
                 <Form.Group className="mb-3" controlId="rating">
                     <Form.Label>Rating</Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={handleInputChange} name="rating" type="number">
+                    <Form.Select aria-label="Default select example" onChange={handleInputChange} name="rating" type="text">
                         <option>Rate this game</option>
                         <option value="1">1</option>
                         <option value="2">2</option>

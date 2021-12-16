@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Modal, Button, Link } from "react-bootstrap";
+import { Container, Row, Col, Modal, Button } from "react-bootstrap";
 import EditGameForm from "../GameList/EditGameForm";
 import GameService from '../../../services/game.service'
 import '../GameList/GamePage.css'
@@ -7,9 +7,13 @@ import NewReviewForm from "../ReviewList/NewReviewForm";
 import { useParams } from "react-router-dom";
 import ReviewService from "../../../services/review.service";
 import ReviewList from "../ReviewList/ReviewList";
+import { Link } from 'react-router-dom'
+import UserService from "../../../services/user.service";
+
 
 const gameService = new GameService()
 const reviewService = new ReviewService()
+const userService = new UserService()
 
 function GameDetails(props) {
 
@@ -31,43 +35,52 @@ function GameDetails(props) {
     const [reviews, setReviews] = useState([]);
     const { id } = props.match.params
 
+    // const [isFavorite, setIsFavorite] = useState(false)
+    // console.log('IS FVORITE????????????????', isFavorite)
 
-    const [modal, setModal] = useState({ showModal: false });
+    const [editModal, setEditModal] = useState({ showEditModal: false });
+    const { showEditModal } = editModal
+    const closeEditModal = () => {
+        setEditModal({
+            showEditModal: false
+        })
+    }
+    const openEditModal = () => {
+        setEditModal({
+            showEditModal: true
+        })
+    }
+
 
     const [reviewModal, setReviewModal] = useState({ showReviewModal: false });
-
     const { showReviewModal } = reviewModal
-
-
-    const { showModal } = modal
-
-    const closeModal = () => {
-        setModal({
-            showModal: false
-        })
-    }
-
-    const openModal = () => {
-        setModal({
-            showModal: true
-        })
-    }
-
     const closeReviewModal = () => {
         setReviewModal({
             showReviewModal: false
         })
     }
-
     const openReviewModal = () => {
         setReviewModal({
             showReviewModal: true
         })
     }
 
+
+    const [gameDeleteModal, setGameDeleteModal] = useState({ showGameDeleteModal: false });
+    const { showGameDeleteModal } = gameDeleteModal
+    const closeGameDeleteModal = () => {
+        setGameDeleteModal({
+            showGameDeleteModal: false
+        })
+    }
+    const openGameDeleteModal = () => {
+        setGameDeleteModal({
+            showGameDeleteModal: true
+        })
+    }
+
+
     const getGameDetails = () => {
-
-
         gameService
             .getGameDetails(id)
             .then(response => {
@@ -78,7 +91,6 @@ function GameDetails(props) {
             })
             .catch(err => console.log(err))
     }
-
 
     const getAllReviews = () => {
         reviewService
@@ -91,32 +103,62 @@ function GameDetails(props) {
     }
 
     useEffect(() => {
-
         getGameDetails()
         getAllReviews()
-
-
     }, []);
-    
 
-    // const gameDelete = () => {
-    //     gameService.deleteGame(id)
-    //         .then(response => (null))
-    //         .catch(err => console.log(err))
-    // }
 
+    const gameDelete = () => {
+        gameService.deleteGame(id)
+            .then(response => (null))
+            .catch(err => console.log(err))
+    }
+
+    const reviewDelete = () => {
+        
+        reviewService
+            .deleteReview(id)
+            .then(response => (null))
+            .catch(err => console.log(err))
+    }
+
+    const gameFav = () => {
+
+        if (!props.loggedUser.favs.includes(game._id)) {
+            userService
+                .favGame(id)
+                .then(response => {
+                    const user = response.data
+                    props.storeUser(user)
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
+    const gameUnfav = () => {
+
+        if (props.loggedUser.favs.includes(game._id)) {
+            userService
+                .unfavGame(id)
+                .then(response => {
+                    const user = response.data
+                    props.storeUser(user)
+                })
+                .catch(err => console.log(err))
+        }
+    }
 
     return (
         <div>
 
-            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openModal}>Edit</Button>}
-            <Modal show={showModal} backdrop="static" onHide={closeModal}>
+            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openEditModal}>Edit</Button>}
+            <Modal show={showEditModal} backdrop="static" onHide={closeEditModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Game</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <EditGameForm game={game} closeModal={closeModal} setGame={setGame} />
+                    <EditGameForm game={game} closeModal={closeEditModal} setGame={setGame} />
                 </Modal.Body>
             </Modal>
 
@@ -127,12 +169,25 @@ function GameDetails(props) {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <NewReviewForm game={game} closeReviewModal={closeReviewModal} />
+                    <NewReviewForm game={game} closeReviewModal={closeReviewModal} getAllReviews={getAllReviews} />
                 </Modal.Body>
             </Modal>
 
+            {props.loggedUser?.role === 'ADMIN' && <Button onClick={openGameDeleteModal}>Delete Game</Button>}
+            <Modal show={showGameDeleteModal} backdrop="static" onHide={closeGameDeleteModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>This will delete the game, are you sure?</Modal.Title>
+                </Modal.Header>
 
-            {/* {props.loggedUser?.role === 'ADMIN' && <Link as={Link} to='/' onClick={}>Logout</Link>} */}
+                <Modal.Body>
+                    {props.loggedUser?.role === 'ADMIN' && <Link to='/' onClick={gameDelete} closeReviewModal={closeGameDeleteModal}>Delete Game</Link>}
+                </Modal.Body>
+            </Modal>
+
+            {
+                props.loggedUser?.favs.includes(game._id) ? <Button onClick={gameUnfav}>Delete from Favorites</Button> : <Button onClick={gameFav}>Add to Favorites</Button>
+            }
+
 
             <Container className='padding'>
                 <Row>
@@ -145,9 +200,9 @@ function GameDetails(props) {
                                 <br />
                                 <p>Genre: {genre}</p>
                                 <p>Made by: {creators}</p>
-                                <p><a href={github}>Repositorio Github</a></p>
-                                <p>Date: {date}</p>
-                                <p>GameUrl: {gameUrl}</p>
+                                <p>Published on: {new Date(date).toDateString()}</p>
+                                <p><a href={github}>Github</a></p>
+                                <p><a href={gameUrl}>Play</a></p>
                             </div>
                         </article>
                     </Col>
@@ -156,7 +211,7 @@ function GameDetails(props) {
                     </Col>
                 </Row>
 
-                <ReviewList reviews={reviews}/>
+                <ReviewList reviews={reviews} reviewDelete={reviewDelete} loggedUser={props.loggedUser} />
             </Container >
 
 
