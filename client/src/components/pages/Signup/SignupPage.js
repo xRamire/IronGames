@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import AuthService from '../../../services/auth.service'
+import './SingupPage.css'
 
 const authService = new AuthService()
 
@@ -32,10 +33,11 @@ function SignupPage(props) {
     }
 
     return (
-        <Container>
+        <Container className='signup'>
             <Row>
                 <Col md={{ span: 4, offset: 4 }}>
-                    <h2>Registro</h2>
+                    <h2>Signup</h2>
+                    <hr/>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="username">
                             <Form.Label>Username</Form.Label>

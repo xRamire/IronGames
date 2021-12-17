@@ -65,7 +65,7 @@ function UserProfile(props) {
         
     <div>
         <Container>
-            <Button className="buttons" onClick={openUserDeleteModal}>Delete this account</Button>
+                {props.loggedUser?.role === 'ADMIN' && <Button className="buttons" onClick={openUserDeleteModal}>Delete this account</Button>}
             <Modal show={showUserDeleteModal} backdrop="static" onHide={closeUserDeleteModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>This account will be deleted, are you sure?</Modal.Title>

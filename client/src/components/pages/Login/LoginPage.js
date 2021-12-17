@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import AuthService from '../../../services/auth.service'
+import './LoginPage.css'
 
 const authService = new AuthService()
 
@@ -35,8 +36,8 @@ function LoginPage(props) {
 
     return (
             (
-                <Container>
-                    <Row>
+            <Container className='login' >
+                <Row >
 
                         <Col md={{ span: 4, offset: 4 }}>
                             <h2>Login</h2>

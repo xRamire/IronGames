@@ -10,7 +10,7 @@ function SearchBar(props) {
 
     return (
         <div><label className='search'>
-                Search:
+            <b>Search:</b>
             </label>
             <input className='search-bar' onChange={(e) => handleSearchChange(e)} name="name" type="text" />
         </div>

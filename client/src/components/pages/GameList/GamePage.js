@@ -43,6 +43,7 @@ function GamePage(props) {
                 <h1>Game List</h1>
                 <SearchBar className='search' getSearch={getSearch} />
             </div>
+            <hr />
             <GameList loggedUser={props.loggedUser} getAllGames={getAllGames} games={filteredGames} {...props} />
         </Container>
     );

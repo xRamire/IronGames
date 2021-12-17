@@ -112,7 +112,7 @@ function GameDetails(props) {
     }
 
     const reviewDelete = () => {
-        
+
         reviewService
             .deleteReview(id)
             .then(response => (null))
@@ -147,7 +147,7 @@ function GameDetails(props) {
 
     return (
         <div>
-            <Container>
+            <Container className="container-margin">
                 {props.loggedUser?.role === 'ADMIN' && <Button className="buttons" onClick={openEditModal}>Edit</Button>}
                 <Modal show={showEditModal} backdrop="static" onHide={closeEditModal}>
                     <Modal.Header closeButton>
@@ -181,7 +181,11 @@ function GameDetails(props) {
                     </Modal.Body>
                 </Modal>
 
-                {props.loggedUser?.favs.includes(game._id) ? <Button className="buttons" onClick={gameUnfav}>Delete from Favorites</Button> : <Button className="buttons" onClick={gameFav}>Add to Favorites</Button>}
+                {props.loggedUser && (props.loggedUser.favs.includes(game._id) ?
+                    <Button className="buttons" onClick={gameUnfav}>Delete from Favorites</Button>
+                    :
+                    <Button className="buttons" onClick={gameFav}>Add to Favorites</Button>
+                )}
             </Container>
 
 
@@ -196,8 +200,8 @@ function GameDetails(props) {
                                 <p><b>Genre:</b> {genre}</p>
                                 <p><b>Made by:</b> {creators}</p>
                                 <p><b>Published on:</b> {new Date(date).toDateString()}</p>
-                                <p><a className="github" href={github}><b>Github</b></a></p>
-                                <Link to={`/game/${game._id}`}><Button variant="primary">Play Now!</Button></Link>              
+                                <p><a className="github" href={github} target="_blank" rel="noreferrer"><b>Github</b></a></p>
+                                <Link to={`/game/${game._id}`}><Button variant="primary">Play Now!</Button></Link>
                             </div>
                         </article>
                     </Col>

@@ -43,7 +43,7 @@ function UserPage(props) {
                 <h1>User List</h1>
                 <SearchBar getSearch={getSearch} />
             </div>
-
+            <hr/>
             <UserList getAllUsers={getAllUsers} users={filteredUsers} loggedUser={props.loggedUser} />
         </Container>
     );
