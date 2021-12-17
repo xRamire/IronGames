@@ -1,17 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
+import ironlogo from '../../../assets/images/ironhack-1.svg'
+import './Home.css'
 
 const Home = () => {
     return (
-        <Container>
-            <h1>Bievenid@ a IronHack Games!</h1>
-            <p>Una MERN Stack sobre juegos</p>
-            <hr></hr>
-            <Link to="/game-list">
-                <Button variant="dark" size="lg">Ver juegos</Button>
-            </Link>
-        </Container>
+        <>
+            <div className="main-background">
+                <Container>
+                    <img className="main-logo" src={ironlogo} alt="logo" ></img>
+
+                    <div className="main-text">
+                        <h1>Welcome to IronGames</h1>
+                        <p>Discover what ironhackers made in the third week of IronHack Web-Dev course!</p>
+                    </div>
+                </Container>
+            </div>
+        </>
     )
 }
 
