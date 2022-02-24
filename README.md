@@ -1,6 +1,8 @@
 # IronGames
 Games made by students in the third week of IronHack course!
 
+Technologies: React, Javascript, NodeJs, ExpressJs, MongoDB, CSS, Bootstrap.
+
 Project website: https://irongames.herokuapp.com/
 
 
