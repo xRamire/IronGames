@@ -2,7 +2,6 @@ import React from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AuthService from '../../../services/auth.service'
-import './NavBar.css'
 import logo from '../../../assets/images/ironhack-1.svg'
 
 const authService = new AuthService()
@@ -16,7 +15,8 @@ const Navigation = ({ loggedUser, storeUser }) => {
     }
 
     return (
-        <Navbar bg="dark" variant="dark">
+        <nav>
+
             <Container>
                 <div className='title-logo'>
                     <img className='logo' src={logo} alt='logo'></img>
@@ -36,12 +36,12 @@ const Navigation = ({ loggedUser, storeUser }) => {
                         <>
                             <Nav.Link className='link' as={Link} to="/signup">Signup</Nav.Link>
                             <Nav.Link className='link' as={Link} to="/login">Login</Nav.Link>
-                            
+
                         </>
                     }
                 </Nav>
             </Container>
-        </Navbar>
+        </nav>
     )
 }
 
