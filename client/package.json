@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "cross-env REACT_APP_BASE_URL=http://localhost:5000/api react-scripts start",
-    "build": "cross-env REACT_APP_BASE_URL=https://irongames-backend.onrender.com/api react-scripts build",
+    "build": "cross-env REACT_APP_BASE_URL=https://irongames.onrender.com/api react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
