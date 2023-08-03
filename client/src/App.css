@@ -1,5 +1,5 @@
 :root {
-  --nav-height: 5vh;
+  --nav-height: 80px;
   --nav-width: 100%;
   --black: #212529;
 }
@@ -7,7 +7,7 @@
 body {}
 
 .nav {
-  min-height: var(--nav-height);
+  height: var(--nav-height);
   min-width: var(--nav-width);
   background-color: var(--black);
   display: flex;
@@ -47,4 +47,21 @@ body {}
   margin-left: 10px;
   color: #fff;
   transition: all .3s ease;
+}
+
+.home-bg {
+  background-image: url(./assets/images/Characters-background.png);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 400px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing {
+  min-height: calc(100vh - 80px);
+  position: relative;
 }

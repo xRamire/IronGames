@@ -21,10 +21,3 @@
 .main-text p {
     font-size: 1.2rem;
 }
-
-.main-background {
-    background-image: url('../../../assets/images/Characters-background.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    height: 88vh;
-}
