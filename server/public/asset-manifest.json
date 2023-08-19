@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.70a43be0.chunk.css",
+    "main.js": "/static/js/main.a4b3f964.chunk.js",
+    "main.js.map": "/static/js/main.a4b3f964.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.776c1e0d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.776c1e0d.js.map",
+    "static/css/2.cbedb215.chunk.css": "/static/css/2.cbedb215.chunk.css",
+    "static/js/2.7fdc6f48.chunk.js": "/static/js/2.7fdc6f48.chunk.js",
+    "static/js/2.7fdc6f48.chunk.js.map": "/static/js/2.7fdc6f48.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.cbedb215.chunk.css.map": "/static/css/2.cbedb215.chunk.css.map",
+    "static/css/main.70a43be0.chunk.css.map": "/static/css/main.70a43be0.chunk.css.map",
+    "static/js/2.7fdc6f48.chunk.js.LICENSE.txt": "/static/js/2.7fdc6f48.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/Characters-background.6b38e16f.png",
+    "static/media/ironhack-1.06a8361a.svg": "/static/media/ironhack-1.06a8361a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.776c1e0d.js",
+    "static/css/2.cbedb215.chunk.css",
+    "static/js/2.7fdc6f48.chunk.js",
+    "static/css/main.70a43be0.chunk.css",
+    "static/js/main.a4b3f964.chunk.js"
+  ]
+}
