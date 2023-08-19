@@ -50,15 +50,9 @@ body {}
 }
 
 .home-bg {
-  background-image: url(./assets/images/Characters-background.png);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 400px;
-  width: 100%;
-  background-position: center;
+  background: url(./assets/images/Characters-background.png);
+  background-position: bottom;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .landing {

@@ -7,7 +7,7 @@ import './Home.css'
 const Home = () => {
     return (
         <>
-            <section className="landing">
+            <section className="landing home-bg">
 
                 <Container>
                     <Row>
@@ -21,9 +21,6 @@ const Home = () => {
                         </div>
                     </Row>
                 </Container>
-                <div className="home-bg">
-
-                </div>
 
             </section>
 
